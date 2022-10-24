@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+    font-size: 100%;
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+}
+
+@import './variables.scss';

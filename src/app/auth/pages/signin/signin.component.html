@@ -1,0 +1,44 @@
+<main class="signin">
+    <div class="signin__container">
+        <h1 *ngIf="!this.user" class="signin__container__title">Iniciá sesión</h1>
+        <form [formGroup]="signinForm" (ngSubmit)="login()">
+            <div class="signin__container__form">
+                <div *ngIf="!this.user" class="signin__container__form__item">
+                    <input 
+                        autocomplete="off" 
+                        type="text" 
+                        id="username" 
+                        placeholder="" 
+                        formControlName="username" 
+                        class="signin__container__form__item--input"
+                        required>
+                        <label class="signin__container__form__item--label" for="username">Nombre de usuario</label>
+                </div>
+                <div *ngIf="this.user" class="signin__container__form__item">
+                    <!-- Usuario guardado -->
+                </div>
+                <div class="signin__container__form__item">
+                    <input 
+                        autocomplete="off" 
+                        type="password" 
+                        id="password" 
+                        placeholder="" 
+                        formControlName="password" 
+                        class="signin__container__form__item--input"
+                        required>
+                        <label class="signin__container__form__item--label" for="password">Contraseña</label>
+                </div>
+                <div *ngIf="invalidCredentials" class="signin__container__form__item signin__container__form__item--invalid">
+                    <fa-icon [icon]="faExclamationCircle"></fa-icon> 
+                    <p class="">Usuario y/o contraseña incorrectos.</p>
+                </div>
+                <div class="signin__container__form__item">
+                    <button class="signin__container__form__item--button" [disabled]="submitting">
+                        <fa-icon *ngIf="submitting" [icon]="faSpinner" [spin]="true"></fa-icon>
+                        {{btnValue}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
