@@ -15,9 +15,13 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: 'management',
+        path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       },
+      {
+        path: 'news',
+        loadChildren: () => import('./dashboard/news/news.module').then(m => m.NewsModule)
+      }
     ]
   }
 ];

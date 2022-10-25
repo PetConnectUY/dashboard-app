@@ -1,0 +1,12 @@
+@import './../../../../../styles.scss';
+.dashboard__body{
+    margin-left: 200px;
+    background-color: $bg-color;
+    color: #fff;
+}
+
+@media screen and (max-width: 770px) {
+    .dashboard__body{
+        margin: 0;
+    }
+}

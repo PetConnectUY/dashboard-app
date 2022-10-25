@@ -1,0 +1,36 @@
+@import './../../../../../../styles.scss';
+.index{
+    max-width: 1080px;
+    margin: 0 auto;
+    &__container{
+        background-color: #f2f2f2;
+        color: #2b2b2b;
+        font-family: $primary-font;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px;
+        &--title{
+            font-family: $title-font;
+        }
+        &__header{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            &--button{
+                border: none;
+                padding: 10px;
+                background-color: $secondary-color;
+                color: #fff;
+                border-radius: 10px;
+                font-family: $primary-font;
+                transition: .3s all;
+                margin-bottom: 3px;
+                &:hover{
+                    background-color: darken($secondary-color, 10);
+                }
+            };
+        }
+    }
+}

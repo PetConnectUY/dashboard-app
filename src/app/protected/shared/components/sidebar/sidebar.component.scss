@@ -1,0 +1,55 @@
+@import './../../../../../styles.scss';
+.sidebar{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    padding-top: 20px;
+    background-color: #f2f2f2;
+    font-family: $primary-font;
+    &__container{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        &--title{
+            padding-bottom: 20px;
+            font-size: 25px;
+            font-family: $title-font;
+            font-weight: bold;
+        }
+        & ul{
+            list-style: none;
+            width: 100%;
+            padding-left: 0;
+            & li {
+                margin-bottom: 5px;
+                & button {
+                    width: 100%;
+                    border: none;
+                    padding: 10px;
+                    background-color: $secondary-color;
+                    color: white;
+                    font-size: 17px;
+                    transition: all .3s;
+                    &:hover{
+                        background-color: darken($secondary-color, 10);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .sidebar{
+        display: none;
+    }
+}

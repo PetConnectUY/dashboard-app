@@ -1,0 +1,24 @@
+<div class="search">
+    <form>
+        <input 
+        type="text"
+        placeholder=""
+        [(ngModel)]="arg"
+        [name]="arg"
+        class="search--input"
+        id="arg"
+        required
+        >
+        <label for="arg" class="search--label">Buscar una noticia...</label>
+        <button 
+            type="button"
+            class="search--button"
+            [routerLink]="['.']"
+            [queryParams]="{search: arg}"
+            queryParamsHandling="merge"
+            [class.disabled]="!arg || !news"
+        >
+            <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+        </button>
+    </form>
+</div>

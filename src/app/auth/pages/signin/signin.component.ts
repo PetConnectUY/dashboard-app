@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../shared/services/auth.service';
 import { User } from '../../../shared/interfaces/user';
-import { faExclamationCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle, faSpinner, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-signin',
@@ -13,9 +13,13 @@ import { faExclamationCircle, faSpinner } from '@fortawesome/free-solid-svg-icon
 export class SigninComponent implements OnInit {
   faExclamationCircle = faExclamationCircle;
   faSpinner = faSpinner;
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
 
   user: User|null;
+
   signinForm!: FormGroup;
+  show: boolean = false;;
   submitting: boolean = false;
   btnValue:string = 'Ingresar';
   unknowError:boolean = false;
@@ -69,5 +73,9 @@ export class SigninComponent implements OnInit {
     this.authService.clearStorage();
     window.location.reload();
   } 
+
+  toggleShow() {
+    this.show = !this.show;
+  }
 
 }

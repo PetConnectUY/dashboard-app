@@ -1,0 +1,17 @@
+@import './../../../../../styles.scss';
+.bg-navbar {
+    background-color: #f2f2f2;
+}
+
+.dropdown-item:active{
+    background-color: $secondary-color !important;
+    color: #000;
+}
+
+.dropdown-menu{
+    background-color: $bg-color !important;
+}
+
+.dropdown-item{
+    color: #fff
+}

@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-md navbar-light bg-navbar shadow-sm">
+    <div class="container-fluid">
+        <button type="button" class="btn btn-link d-md-none text-dark fs-2" data-bs-toggle="modal" data-bs-target="#modal-nav">
+            <fa-icon [icon]="faBars"></fa-icon>
+        </button>          
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-none d-md-block">
+            <li class="nav-item dropdown dropdown-end">
+                <button type="button" class="btn btn-dark rounded-3 dropdown-toggle px-4" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ this.getUser().firstname }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end border-0 rounded-3 shadow-sm">
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <fa-icon [icon]="faUser"></fa-icon> Mi cuenta
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider bg-white">
+                    </li>
+                    <li>
+                        <a (click)="signOut()" class="dropdown-item" href="#">
+                            <fa-icon [icon]="faSignOut"></fa-icon> Salir
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

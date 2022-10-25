@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 html {
     font-size: 100%;
 }
@@ -17,4 +19,5 @@ a {
     cursor: pointer;
 }
 
-@import './variables.scss';
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
