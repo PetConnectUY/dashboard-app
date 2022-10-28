@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { faFolderPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-index',
@@ -7,7 +6,7 @@ import { faFolderPlus } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit {
-  faFolderPlus = faFolderPlus;
+
   constructor() { }
 
   ngOnInit(): void {

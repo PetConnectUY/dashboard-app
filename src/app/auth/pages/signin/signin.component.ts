@@ -53,7 +53,7 @@ export class SigninComponent implements OnInit {
             this.invalidCredentials = true;
             this.endSubmittingForm(oldBtnValue);
           } else { 
-            this.router.navigateByUrl('/app');
+            this.router.navigateByUrl('/app/dashboard');
           }
         }
       )

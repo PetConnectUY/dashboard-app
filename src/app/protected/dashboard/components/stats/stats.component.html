@@ -1,0 +1,71 @@
+<div class="stats" *ngIf="!this.loading && !this.unknowError">
+    <div *ngIf="!this.loading && !this.unknowError" class="stats__item">
+        <div class="stats__item__container">
+            <div class="stats__item__container__stats">
+                <p class="stats__item__container__stats--title">Equipo</p>
+                <h2 class="stats__item__container__stats--count">#{{this.stats.users}}</h2>
+            </div>
+            <div class="stats__item__container__icon">
+                <fa-icon [icon]="faUsers"></fa-icon>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!this.loading && !this.unknowError" class="stats__item">
+        <div class="stats__item__container">
+            <div class="stats__item__container__stats">
+                <p class="stats__item__container__stats--title">Noticias</p>
+                <h2 class="stats__item__container__stats--count">#{{this.stats.news}}</h2>
+            </div>
+            <div class="stats__item__container__icon">
+                <fa-icon [icon]="faNewspaper"></fa-icon>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!this.loading && !this.unknowError" class="stats__item">
+        <div class="stats__item__container">
+            <div class="stats__item__container__stats">
+                <p class="stats__item__container__stats--title">Servicios</p>
+                <h2 class="stats__item__container__stats--count">#{{this.stats.services}}</h2>
+            </div>
+            <div class="stats__item__container__icon">
+                <fa-icon [icon]="faStar"></fa-icon>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!this.loading && !this.unknowError" class="stats__item">
+        <div class="stats__item__container">
+            <div class="stats__item__container__stats">
+                <p class="stats__item__container__stats--title">Proyectos</p>
+                <h2 class="stats__item__container__stats--count">#{{this.stats.projects}}</h2>
+            </div>
+            <div class="stats__item__container__icon">
+                <fa-icon [icon]="faRectangleList"></fa-icon>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.loading || this.unknowError" class="stats">
+    <div *ngFor="let item of [].constructor(4)" class="stats__item">
+        <div class="stats__item__container">
+            <div class="stats__item__container__stats">
+                <p class="stats__item__container__stats--title">
+                    <ngx-skeleton-loader
+                        [theme]="{'background-color': '#b2b2b2', width: '100px', height: '14px'}"
+                    ></ngx-skeleton-loader>
+                </p>
+                <h2 class="stats__item__container__stats--count">
+                    <ngx-skeleton-loader
+                        [theme]="{'background-color': '#b2b2b2', width: '50px'}"
+                    ></ngx-skeleton-loader>
+                </h2>
+            </div>
+            <div class="stats__item__container__icon" style="background-color: transparent;">
+                <ngx-skeleton-loader
+                        [theme]="{'background-color': '#b2b2b2'}"
+                        appearance="circle"
+                ></ngx-skeleton-loader>
+            </div>
+        </div>
+    </div>
+</div>

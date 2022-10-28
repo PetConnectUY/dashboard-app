@@ -1,0 +1,54 @@
+<section class="tasks">
+    <div class="tasks__container">
+        <h1 class="tasks__container--title">Tareas</h1>
+        <p class="tasks__container--text">Hey {{this.getUser().firstname | titlecase}}! aquí están las tareas que tienes asignadas.</p>
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th>Imágenes</th>
+                    <th>Ver</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tr>
+                <td colspan="4">
+                    <app-loader *ngIf="loader"></app-loader>
+                </td>
+            </tr>
+            <tbody *ngIf="!loader">
+                <tr *ngFor="let item of tasks.data">
+                    <td class="description">
+                        {{item.description}}
+                    </td>
+                    <td *ngIf="item.images.length > 0">
+                        <fa-icon class="text-success" [icon]="faCheck"></fa-icon>
+                    </td>
+                    <td *ngIf="item.images.length <= 0">
+                        <fa-icon class="text-danger" [icon]="faXmark"></fa-icon>
+                    </td>
+                    <td>
+                        <a (click)="viewTask(item)" class="view-icon">
+                            <fa-icon [icon]="faEye"></fa-icon>
+                        </a>
+                    </td>
+                    <td>
+                        <ng-container *ngIf="item.complete === 1; else pending">
+                            <p ngbTooltip="Completado">
+                                <fa-icon class="text-success" [icon]="faCircleCheck"></fa-icon>
+                            </p>
+                        </ng-container>
+                        <ng-template #pending ngbTooltip="Pendiente">
+                            <p ngbTooltip="Pendiente">
+                                <fa-icon class="text-warning" [icon]="faCircleExclamation"></fa-icon>
+                            </p>
+                        </ng-template>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tasks__container--empty" *ngIf="!loader && tasks.data.length <= 0">
+            <h3><fa-icon class="text-danger" [icon]="faCircleExclamation"></fa-icon> No tienes ninguna tarea asignada por el momento.</h3>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,26 @@
+@import './../../../../../variables.scss';
+.footer{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #2b2b2b;
+    margin-top: 40px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    &--text{
+        font-size: 16px;
+        font-family: $primary-font;
+        & a {
+            text-decoration: none;
+            font-family: $title-font;
+            color: $secondary-color;
+            transition: all .3s;
+            &:hover{
+                color: darken($secondary-color, 10);
+            }
+        }
+    }
+}

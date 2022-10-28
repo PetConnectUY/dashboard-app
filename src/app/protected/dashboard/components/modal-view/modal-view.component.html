@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h5 class="modal-title" *ngIf="taskToHandle.complete === 1">
+        <fa-icon [icon]="faCheckCircle" class="text-success"></fa-icon> Tarea completada
+    </h5>
+    <h5 class="modal-title" *ngIf="taskToHandle.complete === 0">
+        <fa-icon [icon]="faExclamationCircle" class="text-warning"></fa-icon> Tarea no completada
+    </h5>
+    <button type="button" class="btn-close" (click)="closeModal()"></button>
+</div>
+<app-loader *ngIf="loader"></app-loader>
+<div class="modal-body" *ngIf="!loader && !unknowError">
+    <p class="description">
+        <b>Descripción de la tarea:</b> {{taskToHandle.description}}
+    </p>
+    <p *ngIf="taskToHandle.link ! ''">
+        <b>Enlace de la tarea:</b> {{taskToHandle.link}}
+    </p>
+    <picture>
+        <img src="" alt="">
+    </picture>
+</div>
+<div *ngIf="unknowError" class="modal-body text-center">
+    <h3>
+        <fa-icon [icon]="faExclamationCircle"></fa-icon>
+        Ocurrio un error al completar la tarea. Ponte en contacto con un administrador.
+    </h3>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-modal" *ngIf="taskToHandle.complete != 1" (click)="completeTask()">Completar tarea</button>
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+</div>

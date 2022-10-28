@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IndexComponent } from './news/pages/index/index.component';
+import { IndexComponent } from './pages/index/index.component';
+import { NewsIndexComponent } from './news/pages/news-index/news-index.component';
 
 const routes: Routes = [
   {
@@ -9,8 +10,12 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'news',
+    path: '',
     component: IndexComponent
+  },
+  {
+    path: 'news',
+    component: NewsIndexComponent
   }
 ];
 

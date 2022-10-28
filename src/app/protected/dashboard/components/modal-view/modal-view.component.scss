@@ -1,0 +1,8 @@
+@import './../../../../../variables.scss';
+.btn-modal{
+    color: #fff;
+    background-color: $secondary-color;
+}
+.btn-modal:hover{
+    background-color: darken($color: $secondary-color, $amount: 10);
+}
