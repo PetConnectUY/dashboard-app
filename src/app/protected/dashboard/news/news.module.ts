@@ -7,12 +7,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaginationModule } from '../../shared/modules/pagination/pagination.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewsIndexComponent } from './pages/news-index/news-index.component';
-
+import { ModalFormComponent } from './components/modal-form/modal-form.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
     SearchComponent,
-    NewsIndexComponent
+    NewsIndexComponent,
+    ModalFormComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,7 @@ import { NewsIndexComponent } from './pages/news-index/news-index.component';
     PaginationModule,
     FormsModule,
     ReactiveFormsModule,
+    EditorModule
   ],
 })
 export class NewsModule { }

@@ -1,9 +1,11 @@
-<div class="index">
-    <div class="index__container">
-        <h2 class="index__container--title">Noticias</h2>
-        <div class="index__container__header">
+<div class="news">
+    <div class="news__container">
+        <h2 class="news__container--title">Noticias</h2>
+        <div class="news__container__header">
             <app-search></app-search>
-            <button class="index__container__header--button"><fa-icon [icon]="faFolderPlus"></fa-icon> Nueva noticia</button>
+            <button class="news__container__header--button" (click)="createNews()">
+                <fa-icon [icon]="faFolderPlus"></fa-icon> Nueva noticia
+            </button>
         </div>
     </div>
 </div>
