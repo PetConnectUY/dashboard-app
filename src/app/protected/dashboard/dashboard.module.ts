@@ -10,6 +10,7 @@ import { IndexComponent } from './pages/index/index.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalViewComponent } from './components/modal-view/modal-view.component';
+import { ModalAlertComponent } from './components/modal-alert/modal-alert.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ModalViewComponent } from './components/modal-view/modal-view.component
     TasksComponent,
     IndexComponent,
     LoaderComponent,
-    ModalViewComponent
+    ModalViewComponent,
+    ModalAlertComponent
   ],
   imports: [
     CommonModule,
@@ -26,5 +28,8 @@ import { ModalViewComponent } from './components/modal-view/modal-view.component
     NgxSkeletonLoaderModule,
     NgbModule
   ],
+  exports: [
+    LoaderComponent
+  ]
 })
 export class DashboardModule { }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { NewsPagination } from '../../interfaces/news-pagination';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,6 +12,9 @@ export class SearchComponent implements OnInit {
   faMagnifyingGlass = faMagnifyingGlass;
   @Input() arg!:string;
   @Input() news!:NewsPagination;
+  isSearching: boolean = false;
+  @Output() onSearch: EventEmitter<NewsPagination> = new EventEmitter();
+  
   constructor(
     private router: Router,
     private route: ActivatedRoute
@@ -21,6 +24,7 @@ export class SearchComponent implements OnInit {
   }
 
   search(){
+    this.isSearching = true;
     let snapshot = this.route.snapshot;
     let params = {... snapshot.queryParams}
     delete params['page'];
@@ -30,5 +34,11 @@ export class SearchComponent implements OnInit {
       queryParams: {'search': this.arg, 'page': params['page']},
       queryParamsHandling: 'merge'
     })
+  }
+
+  seeAll(){
+    this.isSearching = false;
+    this.arg = '';
+    this.onSearch.emit();
   }
 }

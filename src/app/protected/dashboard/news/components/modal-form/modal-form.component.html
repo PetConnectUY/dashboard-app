@@ -3,7 +3,8 @@
     <button type="button" class="btn-close" (click)="closeModal()"></button>
 </div>
 <div class="modal-body">
-    <form [formGroup]="newsForm">
+    <app-loader *ngIf="loading"></app-loader>
+    <form *ngIf="!loading" [formGroup]="newsForm">
         <div class="form">
             <div class="form__item">
                 <input 

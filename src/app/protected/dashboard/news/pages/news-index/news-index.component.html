@@ -2,10 +2,76 @@
     <div class="news__container">
         <h2 class="news__container--title">Noticias</h2>
         <div class="news__container__header">
-            <app-search></app-search>
+            <app-search [news]="this.newsPagination" (onSearch)="this.updateTable()"></app-search>
             <button class="news__container__header--button" (click)="createNews()">
                 <fa-icon [icon]="faFolderPlus"></fa-icon> Nueva noticia
             </button>
+        </div>
+        <div class="news__container__body">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Visible</th>
+                        <th>Cambiar posición</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td colspan="4">
+                        <app-loader *ngIf="loader"></app-loader>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div *ngIf="unknowError" class="news__container__body--error">
+                            <h3>
+                                <fa-icon [icon]="faExclamationCircle"></fa-icon> Ocurrio un error, comunicate con un administrador.
+                            </h3>
+                        </div>
+                    </td>
+                </tr>
+                <tbody *ngIf="!loader && !unknowError">
+                    <tr *ngFor="let item of newsPagination.data; let index = index;">
+                        <td class="title">{{item.title}}</td>
+                        <td>
+                            <a (click)="changeVisibility(item, index)">
+                                <fa-icon class="text-success" *ngIf="item.visible" [icon]="faCheck"></fa-icon>
+                                <fa-icon class="text-danger" *ngIf="!item.visible" [icon]="faXmark"></fa-icon>
+                            </a>
+                        </td>
+                        <td>
+                            <a (click)="moveItemUp(item, index)" class="m-1">
+                                <fa-icon [icon]="faArrowUp"></fa-icon>
+                            </a>
+                            <a (click)="moveItemDown(item, index)" class="m-1">
+                                <fa-icon [icon]="faArrowDown"></fa-icon>
+                            </a>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle btn btn-index" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <fa-icon [icon]="faEllipsis"></fa-icon>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item" (click)="updateItem(item)">
+                                        <fa-icon [icon]="faPencil" class="text-primary"></fa-icon> Editar
+                                    </a>
+                                    <a class="dropdown-item" (click)="deleteItem(item)">
+                                        <fa-icon [icon]="faTrash" class="text-danger"></fa-icon> Eliminar
+                                    </a>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="news__container__footer">
+            <app-pagination
+                *ngIf="!loader" 
+                [pagination]="this.newsPagination"
+            ></app-pagination>
         </div>
     </div>
 </div>

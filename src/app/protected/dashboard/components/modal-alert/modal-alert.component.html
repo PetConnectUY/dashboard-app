@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{ this.modalTitle }}</h5>
+    <button type="button" class="btn-close" (click)="closeModal()"></button>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+    <button type="button" class="btn btn-danger" (click)="confirm()">
+        <fa-icon *ngIf="submittingForm" [icon]="faSpinner" [spin]="true"></fa-icon>
+        {{btnValue}}
+    </button>
+</div>

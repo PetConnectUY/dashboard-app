@@ -1,15 +1,16 @@
+@import './../../../../../../../variables.scss';
 .pagination {
 
     .page-item {
 
         &.active .page-link {
 
-            background-color: var(--bs-green);
+            background-color: $secondary-color;
 
             color:#fff;
 
             &:hover {
-
+                background-color: darken($secondary-color, 10);
                 color:#fff;
 
             }

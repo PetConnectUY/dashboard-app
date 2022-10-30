@@ -9,12 +9,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewsIndexComponent } from './pages/news-index/news-index.component';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { LoaderComponent } from '../components/loader/loader.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
     SearchComponent,
     NewsIndexComponent,
-    ModalFormComponent
+    ModalFormComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +26,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     PaginationModule,
     FormsModule,
     ReactiveFormsModule,
-    EditorModule
+    EditorModule,
+    NgxSkeletonLoaderModule
   ],
 })
 export class NewsModule { }

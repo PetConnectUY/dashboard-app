@@ -3,7 +3,7 @@
     type="text"
     placeholder=""
     [(ngModel)]="arg"
-    [name]="arg"
+    name="arg"
     class="search--input"
     id="arg"
     required
@@ -15,8 +15,16 @@
         [routerLink]="['.']"
         [queryParams]="{search: arg}"
         queryParamsHandling="merge"
-        [class.disabled]="!arg || !news"
+        (click)="search()"
+        [disabled]="!arg || !news"
     >
         <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
     </button>
+    <button
+        type="button"
+        class="search--searching-btn"
+        [routerLink]="['.']"
+        (click)="seeAll()"
+        [disabled]="!isSearching"
+        *ngIf="isSearching">Ver todos</button>
 </div>

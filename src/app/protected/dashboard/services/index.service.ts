@@ -6,6 +6,7 @@ import { Stats } from '../interfaces/stats';
 import { Tasks } from '../interfaces/tasks';
 import { ParamMap } from '@angular/router';
 import { TasksPagination } from '../interfaces/tasks-pagination';
+import { HelperService } from '../../../shared/services/helper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ import { TasksPagination } from '../interfaces/tasks-pagination';
 export class IndexService {
   private baseUrl = environment.apiUrl;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private helperService: HelperService
   ) { }
 
   statsCount():Observable<Stats> {
@@ -22,7 +24,7 @@ export class IndexService {
 
   getTasks(paramMap: ParamMap):Observable<TasksPagination> {
     return this.http.get<TasksPagination>(this.baseUrl+'tasks', {
-      params: this.getHttpParams(paramMap, ['page'])
+      params: this.helperService.getHttpParams(paramMap, ['page'])
     });
   }
 
@@ -32,15 +34,5 @@ export class IndexService {
 
   completeTask(task: Tasks):Observable<Tasks> {
     return this.http.post<Tasks>(`${this.baseUrl}tasks/${task.id}/complete-task`, {});
-  }
-
-  getHttpParams(paramMap: ParamMap, paramsNames: string[]): HttpParams {
-    let params = new HttpParams();
-    paramsNames.forEach(paramName => {
-      if(paramMap.has(paramName)) {
-        params = params.append(paramName, paramMap.get(paramName)!);
-      }
-    });
-    return params;
   }
 }

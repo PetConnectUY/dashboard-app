@@ -18,6 +18,7 @@ export class ModalFormComponent implements OnInit {
   modalBtnTitle!:string;
   loading: boolean = false;
   unknowError: boolean = false;
+  onChangeError!: string;
 
   newsForm!: FormGroup;
 
@@ -29,7 +30,15 @@ export class ModalFormComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.newsToEdit) {
-
+      this.modalTitle = 'Editar noticia';
+      this.modalBtnTitle = 'Editar';
+      this.newsForm = this.fb.group({
+        'title': [this.newsToEdit.title, [Validators.required, Validators.maxLength(100)]],
+        'content': [this.newsToEdit.content, Validators.required],
+        'link': [this.newsToEdit.link, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
+        'image': [null, []],
+        'visible': [this.newsToEdit.visible, Validators.required]
+      });
     } else {
       this.modalTitle = 'Nueva noticia';
       this.modalBtnTitle = 'Crear';
@@ -37,8 +46,8 @@ export class ModalFormComponent implements OnInit {
         'title': ["", [Validators.required, Validators.maxLength(100)]],
         'content': ["", Validators.required],
         'link': ["", Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
-        'image': [null, ],
-        'visible': ["1", Validators.nullValidator]
+        'image': [null, Validators.required],
+        'visible': ["1", Validators.required]
       });
     }
   }
@@ -65,9 +74,19 @@ export class ModalFormComponent implements OnInit {
       formData.append('image', this.newsForm.get('image')?.value);
       
       if(this.newsToEdit) {
-        return;
+        this.newsService.update(formData, this.newsToEdit.id).subscribe({
+          next: (res: News) => {
+            this.closeModal();
+            this.onSubmit.emit(res);
+          },
+          error: (err: HttpErrorResponse) => {
+            this.unknowError = true;
+            this.loading = false;
+            this.onChangeError = 'Ocurrio un error al actualizar la noticia.';
+          }
+        })
       } else {
-        this.newsService.storeNews(formData).subscribe({
+        this.newsService.store(formData).subscribe({
           next: (res: News) => {
             this.onSubmit.emit(res);
             this.unknowError = false;
@@ -76,7 +95,7 @@ export class ModalFormComponent implements OnInit {
           error: (err: HttpErrorResponse) => {
             this.loading = false;
             this.unknowError = true;
-            console.log(err);
+            this.onChangeError = 'Ocurrio un error al crear la noticia.';
           }
         });
       }
