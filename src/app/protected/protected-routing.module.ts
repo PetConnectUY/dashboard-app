@@ -21,6 +21,10 @@ const routes: Routes = [
       {
         path: 'news',
         loadChildren: () => import('./dashboard/news/news.module').then(m => m.NewsModule)
+      },
+      {
+        path: 'projects',
+        loadChildren: () => import('./dashboard/projects/projects.module').then(m => m.ProjectsModule)
       }
     ]
   }

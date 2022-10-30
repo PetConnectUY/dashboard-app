@@ -30,6 +30,7 @@ export class NewsIndexComponent implements OnInit {
   unknowError: boolean = false;
   searching: boolean = false;
   errorOnChange!: string;
+  searchTitle: string = 'Buscar una noticia...';
   
   newsPagination!:NewsPagination;
 

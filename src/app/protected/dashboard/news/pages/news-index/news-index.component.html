@@ -2,7 +2,10 @@
     <div class="news__container">
         <h2 class="news__container--title">Noticias</h2>
         <div class="news__container__header">
-            <app-search [news]="this.newsPagination" (onSearch)="this.updateTable()"></app-search>
+            <app-search 
+                [news]="this.newsPagination" 
+                [title]="this.searchTitle"
+                (onSearch)="this.updateTable()"></app-search>
             <button class="news__container__header--button" (click)="createNews()">
                 <fa-icon [icon]="faFolderPlus"></fa-icon> Nueva noticia
             </button>
@@ -12,7 +15,7 @@
                 <thead>
                     <tr>
                         <th>Título</th>
-                        <th>Visible</th>
+                        <th class="d-lg">Visible</th>
                         <th>Cambiar posición</th>
                         <th>Opciones</th>
                     </tr>
@@ -34,7 +37,7 @@
                 <tbody *ngIf="!loader && !unknowError">
                     <tr *ngFor="let item of newsPagination.data; let index = index;">
                         <td class="title">{{item.title}}</td>
-                        <td>
+                        <td class="d-lg">
                             <a (click)="changeVisibility(item, index)">
                                 <fa-icon class="text-success" *ngIf="item.visible" [icon]="faCheck"></fa-icon>
                                 <fa-icon class="text-danger" *ngIf="!item.visible" [icon]="faXmark"></fa-icon>

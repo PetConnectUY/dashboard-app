@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { NewsPagination } from '../../interfaces/news-pagination';
+import { NewsPagination } from '../../news/interfaces/news-pagination';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,6 +12,7 @@ export class SearchComponent implements OnInit {
   faMagnifyingGlass = faMagnifyingGlass;
   @Input() arg!:string;
   @Input() news!:NewsPagination;
+  @Input() title!:string;
   isSearching: boolean = false;
   @Output() onSearch: EventEmitter<NewsPagination> = new EventEmitter();
   
