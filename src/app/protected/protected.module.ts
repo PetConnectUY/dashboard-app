@@ -16,12 +16,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NavbarComponent,
     SidebarComponent,
     FooterComponent,
-    ModalNavbarComponent
+    ModalNavbarComponent,
   ],
   imports: [
     CommonModule,
     ProtectedRoutingModule,
     FontAwesomeModule,
-  ]
+  ],
 })
 export class ProtectedModule { }

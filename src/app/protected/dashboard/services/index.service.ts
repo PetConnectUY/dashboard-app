@@ -28,10 +28,6 @@ export class IndexService {
     });
   }
 
-  getTasksImages(task: Tasks){
-    //return this.http.get(`${this.baseUrl}tasks-images/${task.id}/get-image/1`, {responseType:"blob" as "json"});
-  }
-
   completeTask(task: Tasks):Observable<Tasks> {
     return this.http.post<Tasks>(`${this.baseUrl}tasks/${task.id}/complete-task`, {});
   }

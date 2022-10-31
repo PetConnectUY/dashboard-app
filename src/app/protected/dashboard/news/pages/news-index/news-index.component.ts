@@ -30,7 +30,6 @@ export class NewsIndexComponent implements OnInit {
   unknowError: boolean = false;
   searching: boolean = false;
   errorOnChange!: string;
-  searchTitle: string = 'Buscar una noticia...';
   
   newsPagination!:NewsPagination;
 
@@ -140,7 +139,7 @@ export class NewsIndexComponent implements OnInit {
       if(data?.title != undefined) {
         data.title = res.title;
       }
-    })
+    });
   }
 
   deleteItem(news: News){

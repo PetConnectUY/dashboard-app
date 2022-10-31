@@ -4,6 +4,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewsService } from '../../news/services/news.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { Project } from '../../projects/interfaces/project';
+import { ProjectsService } from '../../projects/services/projects.service';
 
 @Component({
   selector: 'app-modal-alert',
@@ -17,13 +19,19 @@ export class ModalAlertComponent implements OnInit {
   submittingForm: boolean = false;
   onChangeError!: string;
   @Input() btnValue!: string;
+  //news
   @Input() newsToHandle!: News;
   @Input() deleteNews!:boolean;
-  @Output() onConfirm:EventEmitter<News> = new EventEmitter();
+
+  //project
+  @Input() projectToHandle!: Project;
+  @Input() deleteProject!: boolean;
+  @Output() onConfirm:EventEmitter<any> = new EventEmitter();
   
   constructor(
     private activeModal: NgbActiveModal,
-    private newsService: NewsService
+    private newsService: NewsService,
+    private projectService: ProjectsService
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +56,18 @@ export class ModalAlertComponent implements OnInit {
             this.onChangeError = 'Ocurrio un error al borrar la noticia.';
           }
         });
+    }
+    if(this.deleteProject){
+      this.projectService.delete(this.projectToHandle).subscribe({
+        next: (res: Project) => {
+          this.closeModal();
+          this.onConfirm.emit(res);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.submittingForm = false;
+          this.onChangeError = 'Ocurrio un error al borrar el proyecto.';
+        }
+      })
     }
   }
 

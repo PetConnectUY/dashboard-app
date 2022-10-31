@@ -7,7 +7,11 @@
     </h5>
     <button type="button" class="btn-close" (click)="closeModal()"></button>
 </div>
-<app-loader *ngIf="loader"></app-loader>
+<div class="text-center m-5" *ngIf="loader">
+    <div class="spinner-border violet" role="status">
+        <span class="visually-hidden">Cargando...</span>
+    </div>
+</div>
 <div class="modal-body" *ngIf="!loader && !unknowError">
     <p class="description">
         <b>Descripción de la tarea:</b> {{taskToHandle.description}}

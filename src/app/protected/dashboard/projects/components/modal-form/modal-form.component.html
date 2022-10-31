@@ -8,28 +8,28 @@
             <span class="visually-hidden">Cargando...</span>
         </div>
     </div>
-    <form *ngIf="!loading" [formGroup]="newsForm">
+    <form *ngIf="!loading" [formGroup]="projectForm">
         <div class="form">
             <div class="form__item">
                 <input 
                     type="text"
-                    id="title" 
-                    placeholder="Título de la noticia" 
-                    formControlName="title" 
+                    id="name" 
+                    placeholder="Título del proyecto" 
+                    formControlName="name" 
                     class="form__item--input" 
                 >
             </div>
             <div class="form__item">
                 <editor
                     apiKey="z770qe7e0ubzhodh4qj6b2k6t72qhchqbpnzhogcnuoqqebs"
-                    tagName="content"
-                    name="content"
-                    formControlName="content"
+                    tagName="description"
+                    name="description"
+                    formControlName="description"
                     [init]="{
                         height: 300,
                         menubar: true,
                         language: 'es',
-                        placeholder: 'Contenido de la noticia',
+                        placeholder: 'Descripción del proyecto',
                         plugins: [
                         'advlist autolink lists link image charmap print preview anchor',
                         'searchreplace visualblocks code fullscreen',
@@ -47,28 +47,14 @@
                     type="text"
                     formControlName="link"
                     name="link"
-                    placeholder="Link de la noticia" 
+                    placeholder="Link del proyecto" 
                     class="form__item--input"
                 >
-            </div>
-            <div class="form__item">
-                <select class="form__item--input" formControlName="visible">
-                    <option value="1">Noticia visible</option>
-                    <option value="0">Noticia no visible</option>
-                </select>
-            </div>
-            <div class="form__item">
-                <input 
-                    type="file"
-                    formControlName="image"
-                    name="image"
-                    class="form__item--input"
-                    (change)="onFileChange($event)">
             </div>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn form--btn" (click)="save()" [disabled]="this.newsForm.invalid">{{this.modalBtnTitle}}</button>
+    <button type="button" class="btn form--btn" (click)="save()" [disabled]="this.projectForm.invalid">{{this.modalBtnTitle}}</button>
     <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
 </div>

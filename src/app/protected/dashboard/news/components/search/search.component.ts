@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { NewsPagination } from '../../news/interfaces/news-pagination';
+import { NewsPagination } from './../../interfaces/news-pagination';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
