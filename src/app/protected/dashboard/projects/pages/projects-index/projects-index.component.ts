@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faCode, faEllipsis, faExclamationCircle, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ProjectsService } from '../../services/projects.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectsPagination } from '../../interfaces/projects-pagination';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -31,7 +31,8 @@ export class ProjectsIndexComponent implements OnInit {
   constructor(
     private projectsService: ProjectsService,
     private route: ActivatedRoute,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -95,7 +96,5 @@ export class ProjectsIndexComponent implements OnInit {
       return this.projectsPagination.data.splice(data, 1);
     })
   }
-
-
 
 }

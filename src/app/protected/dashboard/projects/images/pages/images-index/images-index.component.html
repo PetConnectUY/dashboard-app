@@ -1,0 +1,22 @@
+<div class="images">
+    <div class="images__container">
+        <h2 class="images__container--title">Imágenes del proyecto</h2>
+        <div class="images__container__header">
+            <button class="images__container__header--btn" (click)="createImage()">
+                <fa-icon [icon]="faPlusCircle"></fa-icon> Agregar
+            </button>
+        </div>
+        <div class="loading">
+            <div class="text-center m-5" *ngIf="loader">
+                <div class="spinner-border violet" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+            </div>
+        </div>
+        <div class="images__container__body" *ngIf="!loader">
+            <picture *ngFor="let item of images;">
+                <img (click)="openImage(item)" [src]="item" alt="project-image">
+            </picture>
+        </div>
+    </div>
+</div>
