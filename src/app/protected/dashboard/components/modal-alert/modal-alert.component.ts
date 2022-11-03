@@ -8,6 +8,8 @@ import { Project } from '../../projects/interfaces/project';
 import { ProjectsService } from '../../projects/services/projects.service';
 import { Services } from '../../service/interfaces/services';
 import { ServicesService } from '../../service/services/services.service';
+import { ProjectImages } from '../../projects/interfaces/project-images';
+import { ImagesService } from '../../projects/images/services/images.service';
 
 @Component({
   selector: 'app-modal-alert',
@@ -21,17 +23,18 @@ export class ModalAlertComponent implements OnInit {
   submittingForm: boolean = false;
   onChangeError!: string;
   @Input() btnValue!: string;
-  //news
+
   @Input() newsToHandle!: News;
   @Input() deleteNews!:boolean;
 
-  //project
   @Input() projectToHandle!: Project;
   @Input() deleteProject!: boolean;
 
-  //service
   @Input() serviceToHandle!: Services;
   @Input() deleteService!: boolean;
+  
+  @Input() imageToHandle!: ProjectImages;
+  @Input() deleteImage!: boolean;
 
   @Output() onConfirm:EventEmitter<any> = new EventEmitter();
   
@@ -40,6 +43,7 @@ export class ModalAlertComponent implements OnInit {
     private newsService: NewsService,
     private projectService: ProjectsService,
     private ServicesService: ServicesService,
+    private imagesService: ImagesService,
   ) { }
 
   ngOnInit(): void {
@@ -88,6 +92,18 @@ export class ModalAlertComponent implements OnInit {
           this.onChangeError = 'Ocurrio un error al borrar el servicio.';
         }
       });
+    }
+    if(this.deleteImage){
+      this.imagesService.delete(this.imageToHandle).subscribe({
+        next: (res: ProjectImages) => {
+          this.closeModal();
+          this.onConfirm.emit(res);
+        },
+        error: (res: HttpErrorResponse) => {
+          this.submittingForm = false;
+          this.onChangeError = 'Ocurrio un error al borrar la imagen.';
+        }
+      })
     }
   }
 

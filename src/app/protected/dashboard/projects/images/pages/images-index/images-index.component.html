@@ -14,8 +14,13 @@
             </div>
         </div>
         <div class="images__container__body" *ngIf="!loader">
-            <picture *ngFor="let item of images;">
-                <img (click)="openImage(item)" [src]="item" alt="project-image">
+            <picture *ngFor="let image of images;">
+                <img (click)="openImage(image.image)" [src]="image.image" alt="project-image">
+                <div class="images__container__body--button">
+                    <button (click)="deleteItem(image.item)">
+                        <fa-icon [icon]="faTrash"></fa-icon>
+                    </button>
+                </div>
             </picture>
         </div>
     </div>

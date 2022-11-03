@@ -27,4 +27,8 @@ export class ImagesService {
   getImages(id: number): Observable<any>{
     return this.http.get<any>(`${this.baseUrl}/${id}/view-image`, {responseType:"blob" as "json"});
   }
+
+  delete(image: ProjectImages): Observable<ProjectImages>{
+    return this.http.delete<ProjectImages>(`${this.baseUrl}/${image.project_id}/destroy-image/${image.id}`);
+  }
 }
