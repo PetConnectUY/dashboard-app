@@ -1,0 +1,70 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{this.modalTitle}}</h5>
+    <button type="button" class="btn-close" (click)="closeModal()"></button>
+</div>
+<div class="modal-body">
+    <div class="text-center m-5" *ngIf="loading">
+        <div class="spinner-border violet" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+    </div>
+    <form *ngIf="!loading" [formGroup]="serviceForm">
+        <div class="form">
+            <div class="form__item">
+                <input 
+                    type="text"
+                    id="name" 
+                    placeholder="Nombre del servicio" 
+                    formControlName="name" 
+                    class="form__item--input" 
+                >
+            </div>
+            <div class="form__item">
+                <editor
+                    apiKey="z770qe7e0ubzhodh4qj6b2k6t72qhchqbpnzhogcnuoqqebs"
+                    tagName="description"
+                    name="description"
+                    formControlName="description"
+                    [init]="{
+                        height: 300,
+                        menubar: true,
+                        language: 'es',
+                        placeholder: 'Descripción del servicio',
+                        plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                        ],
+                        toolbar:
+                        'undo redo | formatselect | bold italic backcolor | \
+                        alignleft aligncenter alignright alignjustify | \
+                        bullist numlist outdent indent | removeformat | help'
+                    }"
+                ></editor>
+            </div>
+            <div class="form__item">
+                <input 
+                    type="file"
+                    formControlName="image"
+                    name="image"
+                    class="form__item--input"
+                    (change)="onFileChange($event)">
+            </div>
+            <div class="form__item" *ngIf="usersLoading">
+                <select class="form__item--input" formControlName="user_service_manager">
+                    <option value="" selected>Cargando usuarios...</option>
+                </select>
+            </div>
+            <div class="form__item" *ngIf="!usersLoading">
+                <select class="form__item--input" formControlName="user_service_manager" *ngFor="let item of usersPagination.data">
+                    <option value="">Seleccionar usuario</option>
+                    <option [value]="item.id">{{item.firstname}}</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn form--btn" (click)="save()" [disabled]="this.serviceForm.invalid">{{this.modalBtnTitle}}</button>
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+</div>

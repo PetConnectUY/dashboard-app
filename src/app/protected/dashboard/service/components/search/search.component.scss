@@ -1,0 +1,65 @@
+@import './../../../../../../variables.scss';
+.search{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 3px;
+    &--label{
+        position: absolute;
+        pointer-events: none;
+        top: 5px;
+        left: 12px;
+        transition: all 0.3s ease;
+    }
+    &--input{
+        padding: 5px;
+        border: none;
+        outline: none;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom: 2px solid $secondary-color;
+    }
+    &--button{
+        border: none;
+        padding: 5px;
+        background-color: $secondary-color;
+        color: #fff;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-bottom: 2px solid $secondary-color;
+        transition: .3s all;
+        &:hover{
+            background-color: darken($secondary-color, 10);
+        }
+        &:disabled{
+            pointer-events: none;
+            cursor: no-drop;
+            background-color: grayscale($secondary-color);
+        }
+    }
+    &--searching-btn{
+        border: none;
+        padding: 5px;
+        margin: 3px 5px;
+        background-color: $secondary-color;
+        color: #fff;
+        border-radius: 5px;
+        transition: .3s all;
+        &:hover{
+            background-color: darken($secondary-color, 10);
+        }
+    }
+}
+
+.search--input:focus ~ .search--label,
+.search--input:not(:focus):valid ~ .search--label {
+    top: -15px;
+    bottom: 0px;
+    left: 0px;
+    font-size: 11px;
+    opacity: 1;
+    color: #404040;
+}

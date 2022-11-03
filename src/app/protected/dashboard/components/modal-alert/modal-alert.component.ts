@@ -6,6 +6,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Project } from '../../projects/interfaces/project';
 import { ProjectsService } from '../../projects/services/projects.service';
+import { Services } from '../../service/interfaces/services';
+import { ServicesService } from '../../service/services/services.service';
 
 @Component({
   selector: 'app-modal-alert',
@@ -26,12 +28,18 @@ export class ModalAlertComponent implements OnInit {
   //project
   @Input() projectToHandle!: Project;
   @Input() deleteProject!: boolean;
+
+  //service
+  @Input() serviceToHandle!: Services;
+  @Input() deleteService!: boolean;
+
   @Output() onConfirm:EventEmitter<any> = new EventEmitter();
   
   constructor(
     private activeModal: NgbActiveModal,
     private newsService: NewsService,
-    private projectService: ProjectsService
+    private projectService: ProjectsService,
+    private ServicesService: ServicesService,
   ) { }
 
   ngOnInit(): void {
@@ -68,6 +76,18 @@ export class ModalAlertComponent implements OnInit {
           this.onChangeError = 'Ocurrio un error al borrar el proyecto.';
         }
       })
+    }
+    if(this.deleteService){
+      this.ServicesService.delete(this.serviceToHandle).subscribe({
+        next: (res: Services) => {
+          this.closeModal();
+          this.onConfirm.emit(res);
+        },
+        error: (res: HttpErrorResponse) => {
+          this.submittingForm = false;
+          this.onChangeError = 'Ocurrio un error al borrar el servicio.';
+        }
+      });
     }
   }
 

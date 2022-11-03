@@ -1,0 +1,30 @@
+<div class="search">
+    <input 
+    type="text"
+    placeholder=""
+    [(ngModel)]="arg"
+    name="arg"
+    class="search--input"
+    id="arg"
+    required
+    >
+    <label for="arg" class="search--label">Buscar un proyecto...</label>
+    <button 
+        type="button"
+        class="search--button"
+        [routerLink]="['.']"
+        [queryParams]="{search: arg}"
+        queryParamsHandling="merge"
+        (click)="search()"
+        [disabled]="!arg || !services"
+    >
+        <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+    </button>
+    <button
+        type="button"
+        class="search--searching-btn"
+        [routerLink]="['.']"
+        (click)="seeAll()"
+        [disabled]="!isSearching"
+        *ngIf="isSearching">Ver todos</button>
+</div>

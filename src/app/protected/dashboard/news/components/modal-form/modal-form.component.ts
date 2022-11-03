@@ -26,7 +26,7 @@ export class ModalFormComponent implements OnInit {
     private fb: FormBuilder,
     private newsService: NewsService,
     private activeModal: NgbActiveModal
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     if(this.newsToEdit) {

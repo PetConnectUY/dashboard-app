@@ -10,6 +10,7 @@ import { IndexComponent } from './pages/index/index.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalViewComponent } from './components/modal-view/modal-view.component';
 import { ModalAlertComponent } from './components/modal-alert/modal-alert.component';
+import { IndexUsersComponent } from './users/pages/index-users/index-users.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ModalAlertComponent } from './components/modal-alert/modal-alert.compon
     IndexComponent,
     ModalViewComponent,
     ModalAlertComponent,
+    IndexUsersComponent,
   ],
   imports: [
     CommonModule,

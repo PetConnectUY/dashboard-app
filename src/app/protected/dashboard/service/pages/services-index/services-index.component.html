@@ -1,25 +1,30 @@
-<div class="projects">
-    <div class="projects__container">
-        <h2 class="projects__container--title">Proyectos</h2>
-        <div class="projects__container__header">
-            <app-search
-                [projects]="projectsPagination"
-                (onSearch)="this.updateTable()"></app-search>
-            <button class="projects__container__header--button" (click)="createProject()">
-                <fa-icon [icon]="faCode"></fa-icon> Nuevo proyecto
-            </button>
+<div class="services">
+    <div class="services__container">
+        <h2 class="services__container--title">Servicios</h2>
+        <div class="services__container__header">
+            <app-search></app-search>
+            <ng-container *ngIf="loader; else noLoader">
+                <button class="services__container__header--button" [disabled]="loader">
+                    <fa-icon [icon]="faSpinner" [spin]="true"></fa-icon> Cargando...
+                </button>
+            </ng-container>
+            <ng-template #noLoader>
+                <button class="services__container__header--button" (click)="createService()">
+                    <fa-icon [icon]="faLaptopCode"></fa-icon> Nuevo servicio
+                </button>
+            </ng-template>
+            
         </div>
-        <div class="projects__container__body">
+        <div class="services__container__body">
             <table class="table text-center">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Imágenes</th>
-                        <th>Opciones</th>
+                        <td>Nombre</td>
+                        <td>Opciones</td>
                     </tr>
                 </thead>
                 <tr>
-                    <td colspan="3">
+                    <td colspan="2">
                         <div class="text-center m-5" *ngIf="loader">
                             <div class="spinner-border violet" role="status">
                                 <span class="visually-hidden">Cargando...</span>
@@ -28,7 +33,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3">
+                    <td colspan="2">
                         <div *ngIf="unknowError" class="projects__container__body--error">
                             <h3>
                                 <fa-icon [icon]="faExclamationCircle"></fa-icon> Ocurrio un error, comunicate con un administrador.
@@ -36,16 +41,9 @@
                         </div>
                     </td>
                 </tr>
-                <tbody *ngIf="!loader && !unknowError">
-                    <tr *ngFor="let item of projectsPagination.data">
-                        <td class="title">
-                            {{item.name}}
-                        </td>
-                        <td>
-                            <a class="link" [routerLink]="['./images/', item.id]">
-                                Imágenes ({{item.images}})
-                            </a>
-                        </td>
+                <tbody *ngIf="!loader">
+                    <tr *ngFor="let item of servicesPagination.data">
+                        <td>{{item.name}}</td>
                         <td>
                             <div class="dropdown">
                                 <button class="dropdown-toggle btn btn-index" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -64,9 +62,6 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="projects__container__footer" *ngIf="!loader">
-            <app-pagination [pagination]="this.projectsPagination"></app-pagination>
         </div>
     </div>
 </div>

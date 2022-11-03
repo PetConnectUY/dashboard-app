@@ -29,6 +29,14 @@ const routes: Routes = [
       {
         path: 'projects-images',
         loadChildren: () => import('./dashboard/projects/images/images.module').then(m => m.ImagesModule)
+      },
+      {
+        path: 'services',
+        loadChildren: () => import('./dashboard/service/service.module').then(m => m.ServiceModule)
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./dashboard/users/users.module').then(m => m.UsersModule)
       }
     ]
   }
