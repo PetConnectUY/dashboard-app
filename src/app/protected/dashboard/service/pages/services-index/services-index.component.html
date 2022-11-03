@@ -63,5 +63,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="services__container__footer" *ngIf="!loader">
+            <app-pagination
+                [pagination]="this.servicesPagination"></app-pagination>
+        </div>
     </div>
 </div>

@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { PaginationModule } from '../../shared/modules/pagination/pagination.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     FontAwesomeModule,
     RouterModule,
     NgbModule,
-    EditorModule
+    EditorModule,
+    PaginationModule
   ]
 })
 export class ServiceModule { }
