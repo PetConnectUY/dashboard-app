@@ -6,6 +6,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Project } from '../../projects/interfaces/project';
 import { ProjectsService } from '../../projects/services/projects.service';
+import { ProjectImages } from '../../projects/interfaces/project-images';
+import { ImagesService } from '../../projects/images/services/images.service';
 
 @Component({
   selector: 'app-modal-alert',
@@ -26,12 +28,18 @@ export class ModalAlertComponent implements OnInit {
   //project
   @Input() projectToHandle!: Project;
   @Input() deleteProject!: boolean;
+
+  //image
+  @Input() imageToHandle!: ProjectImages;
+  @Input() deleteImage!: boolean;
+
   @Output() onConfirm:EventEmitter<any> = new EventEmitter();
   
   constructor(
     private activeModal: NgbActiveModal,
     private newsService: NewsService,
-    private projectService: ProjectsService
+    private projectService: ProjectsService,
+    private imagesService: ImagesService,
   ) { }
 
   ngOnInit(): void {
@@ -66,6 +74,18 @@ export class ModalAlertComponent implements OnInit {
         error: (err: HttpErrorResponse) => {
           this.submittingForm = false;
           this.onChangeError = 'Ocurrio un error al borrar el proyecto.';
+        }
+      })
+    }
+    if(this.deleteImage){
+      this.imagesService.delete(this.imageToHandle).subscribe({
+        next: (res: ProjectImages) => {
+          this.closeModal();
+          this.onConfirm.emit(res);
+        },
+        error: (res: HttpErrorResponse) => {
+          this.submittingForm = false;
+          this.onChangeError = 'Ocurrio un error al borrar la imagen.';
         }
       })
     }
