@@ -43,6 +43,12 @@
                         background-color: darken($secondary-color, 10);
                     }
                 }
+                .active-link{
+                    background-color: darken($secondary-color, $amount: 15);
+                    &:hover{
+                        background-color: darken($secondary-color, $amount: 20);
+                    }
+                }
             }
         }
     }

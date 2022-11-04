@@ -40,7 +40,7 @@ export class NewsIndexComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.updateTable();
+    this.updateTable();    
   }
 
   updateTable(){

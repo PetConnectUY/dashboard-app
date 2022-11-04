@@ -3,27 +3,27 @@
         <h5 class="sidebar__container--title">Altrion Sites</h5>
         <ul>
             <li>
-                <button [routerLink]="['.']"> 
+                <button [routerLink]="['./dashboard']" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact:true}"> 
                     <fa-icon [icon]="faHouse"></fa-icon> Inicio
                 </button>
             </li>
             <li>
-                <button [routerLink]="['./dashboard/news']">
+                <button [routerLink]="['./dashboard/news']" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact:true}">
                     <fa-icon [icon]="faNewspaper"></fa-icon> Noticias
                 </button>
             </li>
             <li>
-                <button [routerLink]="['./dashboard/projects']">
+                <button [routerLink]="['./dashboard/projects']" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact:true}">
                     <fa-icon [icon]="faCode"></fa-icon> Proyectos
                 </button>
             </li>
             <li>
-                <button [routerLink]="['./dashboard/services']">
+                <button [routerLink]="['./dashboard/services']" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact:true}">
                     <fa-icon [icon]="faLaptopCode"></fa-icon> Servicios
                 </button>
             </li>
             <li>
-                <button [routerLink]="['./dashboard/users']">
+                <button [routerLink]="['./dashboard/users']" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact:true}">
                     <fa-icon [icon]="faUsers"></fa-icon> Usuarios
                 </button>
             </li>

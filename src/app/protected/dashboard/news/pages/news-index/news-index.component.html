@@ -37,6 +37,13 @@
                         </div>
                     </td>
                 </tr>
+                <tr *ngIf="!loader">
+                    <td colspan="4" *ngIf="this.newsPagination.data.length == 0">
+                        <h3>
+                            <fa-icon [icon]="faExclamationCircle" class="text-warning"></fa-icon> No hay noticias disponibles.
+                        </h3>
+                    </td>
+                </tr>
                 <tbody *ngIf="!loader && !unknowError">
                     <tr *ngFor="let item of newsPagination.data; let index = index;">
                         <td class="title">{{item.title}}</td>

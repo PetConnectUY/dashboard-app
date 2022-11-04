@@ -36,6 +36,13 @@
                         </div>
                     </td>
                 </tr>
+                <tr *ngIf="!loader">
+                    <td colspan="3" *ngIf="this.projectsPagination.data.length == 0">
+                        <h3>
+                            <fa-icon [icon]="faExclamationCircle" class="text-warning"></fa-icon> No hay proyectos disponibles.
+                        </h3>
+                    </td>
+                </tr>
                 <tbody *ngIf="!loader && !unknowError">
                     <tr *ngFor="let item of projectsPagination.data">
                         <td class="title">
