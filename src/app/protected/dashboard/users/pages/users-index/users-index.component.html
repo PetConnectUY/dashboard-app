@@ -1,32 +1,24 @@
-<div class="services">
-    <div class="services__container">
-        <h2 class="services__container--title">Servicios</h2>
-        <div class="services__container__header">
+<div class="users">
+    <div class="users__container">
+        <div class="users__container__header">
             <app-search
-                [services]="this.servicesPagination"
+                [users]="usersPagination"
                 (onSearch)="this.updateTable()"></app-search>
-            <ng-container *ngIf="loader; else noLoader">
-                <button class="services__container__header--button" [disabled]="loader">
-                    <fa-icon [icon]="faSpinner" [spin]="true"></fa-icon> Cargando...
-                </button>
-            </ng-container>
-            <ng-template #noLoader>
-                <button class="services__container__header--button" (click)="createService()">
-                    <fa-icon [icon]="faLaptopCode"></fa-icon> Nuevo servicio
-                </button>
-            </ng-template>
-            
+            <button class="users__container__header--button" (click)="createUser()">
+                <fa-icon [icon]="faUser"></fa-icon> Nuevo usuario
+            </button>
         </div>
-        <div class="services__container__body">
+        <div class="users__container__body">
             <table class="table text-center">
                 <thead>
                     <tr>
-                        <td>Nombre</td>
-                        <td>Opciones</td>
+                        <th>Nombre completo</th>
+                        <th>Posición</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="3">
                         <div class="text-center m-5" *ngIf="loader">
                             <div class="spinner-border violet" role="status">
                                 <span class="visually-hidden">Cargando...</span>
@@ -35,7 +27,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="3">
                         <div *ngIf="unknowError" class="projects__container__body--error">
                             <h3>
                                 <fa-icon [icon]="faExclamationCircle"></fa-icon> Ocurrio un error, comunicate con un administrador.
@@ -44,8 +36,9 @@
                     </td>
                 </tr>
                 <tbody *ngIf="!loader">
-                    <tr *ngFor="let item of servicesPagination.data">
-                        <td>{{item.name}}</td>
+                    <tr *ngFor="let item of usersPagination.data">
+                        <td>{{item.firstname | titlecase}} {{item.lastname | titlecase}}</td>
+                        <td>{{item.position}}</td>
                         <td>
                             <div class="dropdown">
                                 <button class="dropdown-toggle btn btn-index" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,9 +58,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="services__container__footer" *ngIf="!loader">
-            <app-pagination
-                [pagination]="this.servicesPagination"></app-pagination>
+        <div class="users__container__footer" *ngIf="!loader">
+            <app-pagination [pagination]="this.usersPagination"></app-pagination>
         </div>
     </div>
 </div>

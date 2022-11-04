@@ -11,6 +11,7 @@
     <form *ngIf="!loading" [formGroup]="serviceForm">
         <div class="form">
             <div class="form__item">
+                <label for="name" *ngIf="this.serviceToEdit">Nombre del servicio</label>
                 <input 
                     type="text"
                     id="name" 
@@ -20,6 +21,7 @@
                 >
             </div>
             <div class="form__item">
+                <label for="description" *ngIf="this.serviceToEdit">Descripción del servicio</label>
                 <editor
                     apiKey="z770qe7e0ubzhodh4qj6b2k6t72qhchqbpnzhogcnuoqqebs"
                     tagName="description"
@@ -43,6 +45,7 @@
                 ></editor>
             </div>
             <div class="form__item">
+                <label for="image" *ngIf="this.serviceToEdit">Imagen del servicio</label>
                 <input 
                     type="file"
                     formControlName="image"
@@ -51,14 +54,16 @@
                     (change)="onFileChange($event)">
             </div>
             <div class="form__item" *ngIf="usersLoading">
+                <label for="user_service_manager" *ngIf="this.serviceToEdit">Usuario</label>
                 <select class="form__item--input" formControlName="user_service_manager">
                     <option value="" selected>Cargando usuarios...</option>
                 </select>
             </div>
             <div class="form__item" *ngIf="!usersLoading">
-                <select class="form__item--input" formControlName="user_service_manager" *ngFor="let item of usersPagination.data">
+                <label for="user_service_manager" *ngIf="this.serviceToEdit">Usuario</label>
+                <select class="form__item--input" formControlName="user_service_manager">
                     <option value="">Seleccionar usuario</option>
-                    <option [value]="item.id">{{item.firstname}}</option>
+                    <option *ngFor="let item of usersPagination.data" [value]="item.id">{{item.firstname}}</option>
                 </select>
             </div>
         </div>

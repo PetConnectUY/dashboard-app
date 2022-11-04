@@ -5,6 +5,7 @@ import { NewsIndexComponent } from './news/pages/news-index/news-index.component
 import { ProjectsIndexComponent } from './projects/pages/projects-index/projects-index.component';
 import { ImagesIndexComponent } from './projects/images/pages/images-index/images-index.component';
 import { ServicesIndexComponent } from './service/pages/services-index/services-index.component';
+import { UsersIndexComponent } from './users/pages/users-index/users-index.component';
 const routes: Routes = [
   {
     path: '',
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'services',
     component: ServicesIndexComponent
+  },
+  {
+    path: 'users',
+    component: UsersIndexComponent
   }
 ];
 

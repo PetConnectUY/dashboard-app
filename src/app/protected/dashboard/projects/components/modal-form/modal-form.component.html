@@ -11,6 +11,7 @@
     <form *ngIf="!loading" [formGroup]="projectForm">
         <div class="form">
             <div class="form__item">
+                <label for="name" *ngIf="this.projectToEdit">Título del proyecto</label>
                 <input 
                     type="text"
                     id="name" 
@@ -20,6 +21,7 @@
                 >
             </div>
             <div class="form__item">
+                <label for="description" *ngIf="this.projectToEdit">Descripción del proyecto</label>
                 <editor
                     apiKey="z770qe7e0ubzhodh4qj6b2k6t72qhchqbpnzhogcnuoqqebs"
                     tagName="description"
@@ -43,6 +45,7 @@
                 ></editor>
             </div>
             <div class="form__item">
+                <label for="link" *ngIf="this.projectToEdit">Link del proyecto</label>
                 <input 
                     type="text"
                     formControlName="link"

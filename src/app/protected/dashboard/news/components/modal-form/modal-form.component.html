@@ -11,6 +11,7 @@
     <form *ngIf="!loading" [formGroup]="newsForm">
         <div class="form">
             <div class="form__item">
+                <label for="title" *ngIf="this.newsToEdit">Título de la noticia</label>
                 <input 
                     type="text"
                     id="title" 
@@ -20,6 +21,7 @@
                 >
             </div>
             <div class="form__item">
+                <label for="content" *ngIf="this.newsToEdit">Contenido de la noticia</label>
                 <editor
                     apiKey="z770qe7e0ubzhodh4qj6b2k6t72qhchqbpnzhogcnuoqqebs"
                     tagName="content"
@@ -43,6 +45,7 @@
                 ></editor>
             </div>
             <div class="form__item">
+                <label for="link" *ngIf="this.newsToEdit">Enlace de la noticia</label>
                 <input 
                     type="text"
                     formControlName="link"
@@ -52,12 +55,14 @@
                 >
             </div>
             <div class="form__item">
+                <label for="visible" *ngIf="this.newsToEdit">Visibilidad de la noticia</label>
                 <select class="form__item--input" formControlName="visible">
                     <option value="1">Noticia visible</option>
                     <option value="0">Noticia no visible</option>
                 </select>
             </div>
             <div class="form__item">
+                <label for="image" *ngIf="this.newsToEdit">Imagen de la noticia</label>
                 <input 
                     type="file"
                     formControlName="image"

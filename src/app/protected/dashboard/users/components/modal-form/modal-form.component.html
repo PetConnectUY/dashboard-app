@@ -1,0 +1,98 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{this.modalTitle}}</h5>
+    <button type="button" class="btn-close" (click)="closeModal()"></button>
+</div>
+<div class="modal-body">
+    <div class="text-center m-5" *ngIf="loading">
+        <div class="spinner-border violet" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+    </div>
+    <form *ngIf="!loading" [formGroup]="userForm">
+        <div class="form">
+            <div class="form__item">
+                <label for="username" *ngIf="this.userToEdit">Nombre de usuario</label>
+                <input 
+                    type="text"
+                    id="username" 
+                    placeholder="Nombre de usuario" 
+                    formControlName="username" 
+                    class="form__item--input" 
+                >
+            </div>
+            <div class="form__item">
+                <label for="email" *ngIf="this.userToEdit">Email</label>
+                <input 
+                    type="email"
+                    id="email" 
+                    placeholder="Email" 
+                    formControlName="email" 
+                    class="form__item--input" 
+                >
+            </div>
+            <div class="form__item" *ngIf="!this.userToEdit">
+                <input 
+                    type="password"
+                    id="password" 
+                    placeholder="Contraseña" 
+                    formControlName="password" 
+                    class="form__item--input" 
+                >
+            </div>
+            <div class="form__item">
+                <label for="firstname" *ngIf="this.userToEdit">Nombre</label>
+                <input 
+                    type="text"
+                    id="firstname" 
+                    placeholder="Nombre" 
+                    formControlName="firstname" 
+                    class="form__item--input" 
+                >
+            </div>
+            <div class="form__item">
+                <label for="lastname" *ngIf="this.userToEdit">Apellido</label>
+                <input 
+                    type="text"
+                    id="lastname" 
+                    placeholder="Apellido" 
+                    formControlName="lastname" 
+                    class="form__item--input" 
+                >
+            </div>
+            <div class="form__item">
+                <label for="location" *ngIf="this.userToEdit">Locación</label>
+                <input 
+                    type="text"
+                    id="location" 
+                    placeholder="Locación" 
+                    formControlName="location" 
+                    class="form__item--input" 
+                >
+            </div>
+            <div class="form__item">
+                <label for="linkedin" *ngIf="this.userToEdit">URL perfil de Linkedin</label>
+                <input 
+                    type="text"
+                    id="linkedin" 
+                    placeholder="URL perfil de Linkedin" 
+                    formControlName="linkedin" 
+                    class="form__item--input" 
+                >
+            </div>
+            <div class="form__item">
+                <label for="position" *ngIf="this.userToEdit">Rango / Posición</label>
+                <input 
+                    type="text"
+                    id="position" 
+                    placeholder="Rango / posición" 
+                    formControlName="position" 
+                    class="form__item--input" 
+                >
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn form--btn" (click)="save()" [disabled]="this.userForm.invalid">{{this.modalBtnTitle}}</button>
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+</div>

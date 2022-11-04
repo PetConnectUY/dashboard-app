@@ -22,4 +22,16 @@ export class UserService {
       params: this.helperService.getHttpParams(paramMap, ['search', 'page'])
     })
   }
+
+  store(formData: FormData): Observable<User>{
+    return this.http.post<User>(this.baseUrl, formData);
+  }
+
+  update(formData: FormData, id: number): Observable<User>{
+    return this.http.post<User>(`${this.baseUrl}/${id}`, formData);
+  }
+
+  delete(user: User): Observable<User>{
+    return this.http.delete<User>(`${this.baseUrl}/${user.id}`);
+  }
 }

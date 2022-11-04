@@ -10,6 +10,8 @@ import { Services } from '../../service/interfaces/services';
 import { ServicesService } from '../../service/services/services.service';
 import { ProjectImages } from '../../projects/interfaces/project-images';
 import { ImagesService } from '../../projects/images/services/images.service';
+import { User } from '../../users/interfaces/user';
+import { UserService } from '../../users/services/user.service';
 
 @Component({
   selector: 'app-modal-alert',
@@ -36,6 +38,10 @@ export class ModalAlertComponent implements OnInit {
   @Input() imageToHandle!: ProjectImages;
   @Input() deleteImage!: boolean;
 
+  @Input() userToHandle!: User;
+  @Input() deleteUser!:boolean;
+
+
   @Output() onConfirm:EventEmitter<any> = new EventEmitter();
   
   constructor(
@@ -44,6 +50,7 @@ export class ModalAlertComponent implements OnInit {
     private projectService: ProjectsService,
     private ServicesService: ServicesService,
     private imagesService: ImagesService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -102,6 +109,18 @@ export class ModalAlertComponent implements OnInit {
         error: (res: HttpErrorResponse) => {
           this.submittingForm = false;
           this.onChangeError = 'Ocurrio un error al borrar la imagen.';
+        }
+      });
+    }
+    if(this.deleteUser){
+      this.userService.delete(this.userToHandle).subscribe({
+        next: (res: User) => {
+          this.closeModal();
+          this.onConfirm.emit(res);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.submittingForm = false;
+          this.onChangeError = 'Ocurrio un error al borrar el usuario.';
         }
       })
     }
