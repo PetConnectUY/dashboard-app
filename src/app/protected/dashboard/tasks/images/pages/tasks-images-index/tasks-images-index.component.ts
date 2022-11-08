@@ -1,48 +1,55 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { faPlusCircle, faTrash, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { TaskImages } from '../../../interfaces/task-images';
 import { ActivatedRoute } from '@angular/router';
-import { ImagesService } from '../../services/images.service';
+import { TaskImagesService } from '../../services/task-images.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalFormComponent } from '../../components/modal-form/modal-form.component';
-import { ProjectImages } from '../../../interfaces/project-images';
-import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ModalImageComponent } from '../../components/modal-image/modal-image.component';
+import { ModalViewComponent } from '../../components/modal-view/modal-view.component';
 import { ModalAlertComponent } from '../../../../components/modal-alert/modal-alert.component';
 
 @Component({
-  selector: 'app-images-index',
-  templateUrl: './images-index.component.html',
-  styleUrls: ['./images-index.component.scss']
+  selector: 'app-tasks-images-index',
+  templateUrl: './tasks-images-index.component.html',
+  styleUrls: ['./tasks-images-index.component.scss']
 })
-export class ImagesIndexComponent implements OnInit {
+export class TasksImagesIndexComponent implements OnInit {
   faPlusCircle = faPlusCircle;
+  faExclamationCircle = faExclamationCircle;
   faTrash = faTrash;
 
-  @Output() onDeleteImage: EventEmitter<ProjectImages> = new EventEmitter();
+  @Output() onDeleteImage: EventEmitter<TaskImages> = new EventEmitter();
 
-  projectId?: string;
+  taskId?: string;
   images:any[] = [];
   loader: boolean = true;
   unknowError: boolean = false;
   onChangeError!:string;
 
   allImages: any[] = [];
+
   constructor(
     private route: ActivatedRoute,
-    private imagesService: ImagesService,
-    private modalService: NgbModal
+    private taskImagesService: TaskImagesService,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(res => {
-      this.projectId = res['id'];
-      this.imagesService.listImages(res['id']).subscribe({
+      this.taskId = res['id'];
+      this.taskImagesService.listImages(res['id']).subscribe({
         next: (res) => {
-          this.loader = true;
-          this.unknowError = false;
-          res.forEach(res => {
-            this.viewImages(res);
-          });
+          if(res.length <= 0){
+            this.loader = false;
+            this.unknowError = false;
+          } else {
+            this.loader = true;
+            this.unknowError = false;
+            res.forEach(res => {
+              this.viewImages(res);
+            });
+          }
         },
         error: (err: HttpErrorResponse) => {
           this.unknowError = true;
@@ -52,8 +59,8 @@ export class ImagesIndexComponent implements OnInit {
     });
   }
 
-  viewImages(item: ProjectImages){    
-    this.imagesService.getImages(item.id).subscribe({
+  viewImages(item: TaskImages){    
+    this.taskImagesService.getImages(item.id).subscribe({
       next: (res: Blob) =>{
         let reader = new FileReader();
         reader.readAsDataURL(res);
@@ -70,36 +77,36 @@ export class ImagesIndexComponent implements OnInit {
     })
   }
 
-  openImage(image: any){
-    const modalRef = this.modalService.open( ModalImageComponent, {
-      size: 'lg',
-      centered: true
-    });
-    modalRef.componentInstance.image = image;
-  }
-
   createImage(){
     const modalRef = this.modalService.open(ModalFormComponent, {
-      size: 'lg',
-      centered: true
+      centered: true,
+      size: 'lg'
     });
-    modalRef.componentInstance.projectId = this.projectId;
+    modalRef.componentInstance.taskId = this.taskId;
     modalRef.componentInstance.onSubmit.subscribe({
-      next: (res: ProjectImages) => {
+      next: (res: TaskImages) => {
         this.loader = true;
         this.viewImages(res);
       }
     });
   }
 
-  deleteItem(image: ProjectImages){
+  openImage(image: any){
+    const modalRef = this.modalService.open( ModalViewComponent, {
+      size: 'lg',
+      centered: true
+    });
+    modalRef.componentInstance.image = image;
+  }
+
+  deleteItem(image: TaskImages){
     const modalRef = this.modalService.open(ModalAlertComponent, {
       size: 'md',
       centered: true,
     });
     modalRef.componentInstance.modalTitle = 'Desea eliminar la imagen?';
-    modalRef.componentInstance.imageToHandle = image;
-    modalRef.componentInstance.deleteImage = true;
+    modalRef.componentInstance.taskImageToHandle = image;
+    modalRef.componentInstance.deleteTaskImage = true;
     modalRef.componentInstance.btnValue = 'Eliminar';
     modalRef.componentInstance.onConfirm.subscribe(() => {
       let data = this.images.findIndex(item => item.id === image.id);

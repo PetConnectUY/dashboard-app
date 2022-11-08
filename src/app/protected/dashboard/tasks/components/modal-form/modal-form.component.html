@@ -1,0 +1,60 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{this.modalTitle}}</h5>
+    <button type="button" class="btn-close" (click)="closeModal()"></button>
+</div>
+<div class="modal-body">
+    <div class="text-center m-5" *ngIf="loading">
+        <div class="spinner-border violet" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+    </div>
+    <form *ngIf="!loading" [formGroup]="taskForm">
+        <div class="form">
+            <div class="form__item">
+                <label for="description" *ngIf="this.taskToEdit">Descripción de la tarea</label>
+                <editor
+                    apiKey="z770qe7e0ubzhodh4qj6b2k6t72qhchqbpnzhogcnuoqqebs"
+                    tagName="description"
+                    name="description"
+                    formControlName="description"
+                    [init]="{
+                        height: 300,
+                        menubar: true,
+                        language: 'es',
+                        placeholder: 'Descripción de la tarea',
+                        plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                        ],
+                        toolbar:
+                        'undo redo | formatselect | bold italic backcolor | \
+                        alignleft aligncenter alignright alignjustify | \
+                        bullist numlist outdent indent | removeformat | help'
+                    }"
+                ></editor>
+            </div>
+            <div class="form__item" *ngIf="!usersPagination.data">
+                <label for="user_id" *ngIf="this.taskToEdit">Usuario</label>
+                <select id="user_id" class="form__item--input" formControlName="user_id">
+                    <option value="" selected>Cargando usuarios...</option>
+                </select>
+            </div>
+            <div class="form__item" *ngIf="usersPagination.data">
+                <label for="user_id" *ngIf="this.taskToEdit">Usuario</label>
+                <select id="user_id" class="form__item--input" formControlName="user_id">
+                    <option value="">Seleccionar usuario</option>
+                    <option *ngFor="let item of usersPagination.data" [value]="item.id">{{item.firstname | titlecase}} {{item.lastname}}</option>
+                </select>
+            </div>
+            <div class="form__item">
+                <label for="link" *ngIf="this.taskToEdit">Enlace (Opcional)</label>
+                <input type="text" name="link" id="link" formControlName="link" placeholder="Enlace (Opcional)" class="form__item--input">
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn form--btn" (click)="save()" [disabled]="this.taskForm.invalid">{{this.modalBtnTitle}}</button>
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+</div>

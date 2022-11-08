@@ -12,6 +12,10 @@ import { ProjectImages } from '../../projects/interfaces/project-images';
 import { ImagesService } from '../../projects/images/services/images.service';
 import { User } from '../../users/interfaces/user';
 import { UserService } from '../../users/services/user.service';
+import { TaskService } from '../../tasks/services/task.service';
+import { Task } from '../../tasks/interfaces/task';
+import { TaskImages } from '../../tasks/interfaces/task-images';
+import { TaskImagesService } from '../../tasks/images/services/task-images.service';
 
 @Component({
   selector: 'app-modal-alert',
@@ -41,6 +45,11 @@ export class ModalAlertComponent implements OnInit {
   @Input() userToHandle!: User;
   @Input() deleteUser!:boolean;
 
+  @Input() taskToHandle!: Task;
+  @Input() deleteTask!:boolean;
+
+  @Input() taskImageToHandle!: TaskImages;
+  @Input() deleteTaskImage!:boolean;
 
   @Output() onConfirm:EventEmitter<any> = new EventEmitter();
   
@@ -50,7 +59,9 @@ export class ModalAlertComponent implements OnInit {
     private projectService: ProjectsService,
     private ServicesService: ServicesService,
     private imagesService: ImagesService,
-    private userService: UserService
+    private userService: UserService,
+    private taskService: TaskService,
+    private taskImagesService: TaskImagesService
   ) { }
 
   ngOnInit(): void {
@@ -121,6 +132,31 @@ export class ModalAlertComponent implements OnInit {
         error: (err: HttpErrorResponse) => {
           this.submittingForm = false;
           this.onChangeError = 'Ocurrio un error al borrar el usuario.';
+        }
+      })
+    }
+    if(this.deleteTask){
+      this.taskService.delete(this.taskToHandle).subscribe({
+        next: (res: Task) => {
+          this.closeModal();
+          this.onConfirm.emit(res);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.submittingForm = false;
+          this.onChangeError = 'Ocurrio un error al borrar la tarea.';
+          
+        }
+      })
+    }
+    if(this.deleteTaskImage){
+      this.taskImagesService.delete(this.taskImageToHandle).subscribe({
+        next: (res: TaskImages) => {
+          this.closeModal();
+          this.onConfirm.emit(res);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.submittingForm = false;
+          this.onChangeError = 'Ocurrio un error al borrar la imagen de la tarea.'
         }
       })
     }

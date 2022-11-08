@@ -1,0 +1,85 @@
+<div class="tasks">
+    <div class="tasks__container">
+        <h2 class="tasks__container--title">Tareas</h2>
+        <div class="tasks__container__header">
+            <app-search
+                [tasks]="this.tasksPagination"
+                (onSearch)="this.updateTable()"></app-search>
+            <ng-container *ngIf="userLoader; else noLoader">
+                <button class="tasks__container__header--button" [disabled]="userLoader">
+                    <fa-icon [icon]="faSpinner" [spin]="true"></fa-icon> Cargando...
+                </button>
+            </ng-container>
+            <ng-template #noLoader>
+                <button class="tasks__container__header--button" (click)="createTask()">
+                    <fa-icon [icon]="faClipboardList"></fa-icon> Nueva tarea
+                </button>
+            </ng-template>
+        </div>
+        <div class="tasks__container__body">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>Ver</th>
+                        <th>Usuario</th>
+                        <th>Imágenes</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td colspan="4">
+                        <div class="text-center m-5" *ngIf="loader">
+                            <div class="spinner-border violet" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div *ngIf="unknowError" class="tasks__container__body--error">
+                            <h3>
+                                <fa-icon [icon]="faExclamationCircle"></fa-icon> Ocurrio un error, comunicate con un administrador.
+                            </h3>
+                        </div>
+                    </td>
+                </tr>
+                <tbody *ngIf="!loader">
+                    <tr *ngFor="let item of tasksPagination.data">
+                        <td>
+                            <a (click)="viewItem(item)" class="view-icon">
+                                <fa-icon [icon]="faEye"></fa-icon>
+                            </a>
+                        </td>
+                        <td>
+                            {{item.user.firstname}} {{item.user.lastname}}
+                        </td>
+                        <td>
+                            <a class="link" [routerLink]="['./images/', item.id]">
+                                Imágenes ({{item.images}})
+                            </a>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle btn btn-index" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <fa-icon [icon]="faEllipsis"></fa-icon>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item" (click)="updateItem(item)">
+                                        <fa-icon [icon]="faPencil" class="text-primary"></fa-icon> Editar
+                                    </a>
+                                    <a class="dropdown-item" (click)="deleteItem(item)">
+                                        <fa-icon [icon]="faTrash" class="text-danger"></fa-icon> Eliminar
+                                    </a>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tasks__container__footer" *ngIf="!loader">
+            <app-pagination [pagination]="this.tasksPagination"></app-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="images">
+    <div class="images__container">
+        <h2 class="images__container--title">Imágenes de la tarea</h2>
+        <div class="images__container__header">
+            <button class="images__container__header--btn" (click)="createImage()">
+                <fa-icon [icon]="faPlusCircle"></fa-icon> Agregar
+            </button>
+        </div>
+        <div class="loading">
+            <div class="text-center m-5" *ngIf="loader">
+                <div class="spinner-border violet" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+            </div>
+        </div>
+        <div class="images__container__body" *ngIf="!loader">
+            <h3 class="text-center m-3" *ngIf="this.images.length <= 0">
+                <fa-icon [icon]="faExclamationCircle" class="text-warning"></fa-icon>
+                No hay imágenes en esta tarea.
+            </h3>
+            <picture *ngFor="let image of images;">
+                <img (click)="openImage(image.image)" [src]="image.image" alt="project-image">
+                <div class="images__container__body--button">
+                    <button (click)="deleteItem(image.item)">
+                        <fa-icon [icon]="faTrash"></fa-icon>
+                    </button>
+                </div>
+            </picture>
+        </div>
+    </div>
+</div>

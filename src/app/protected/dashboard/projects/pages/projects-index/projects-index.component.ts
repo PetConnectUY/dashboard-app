@@ -93,7 +93,7 @@ export class ProjectsIndexComponent implements OnInit {
     modalRef.componentInstance.onConfirm.subscribe(() => {
       let data = this.projectsPagination.data.findIndex(item => item.id === project.id);
       return this.projectsPagination.data.splice(data, 1);
-    })
+    });
   }
 
 }

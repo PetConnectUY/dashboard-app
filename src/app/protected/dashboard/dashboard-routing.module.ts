@@ -6,6 +6,8 @@ import { ProjectsIndexComponent } from './projects/pages/projects-index/projects
 import { ImagesIndexComponent } from './projects/images/pages/images-index/images-index.component';
 import { ServicesIndexComponent } from './service/pages/services-index/services-index.component';
 import { UsersIndexComponent } from './users/pages/users-index/users-index.component';
+import { TasksIndexComponent } from './tasks/pages/tasks-index/tasks-index.component';
+import { TasksImagesIndexComponent } from './tasks/images/pages/tasks-images-index/tasks-images-index.component';
 const routes: Routes = [
   {
     path: '',
@@ -35,6 +37,14 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersIndexComponent
+  },
+  {
+    path: 'tasks',
+    component: TasksIndexComponent
+  },
+  {
+    path: 'tasks/images/:id',
+    component: TasksImagesIndexComponent
   }
 ];
 

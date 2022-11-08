@@ -8,6 +8,11 @@
                 </button>
             </li>
             <li>
+                <button [routerLink]="['./dashboard/tasks']" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact:true}">
+                    <fa-icon [icon]="faListCheck"></fa-icon> Tareas
+                </button>
+            </li>
+            <li>
                 <button [routerLink]="['./dashboard/news']" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact:true}">
                     <fa-icon [icon]="faNewspaper"></fa-icon> Noticias
                 </button>

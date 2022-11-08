@@ -4,6 +4,6 @@ export interface Tasks {
     user_id: number,
     description: string,
     link: string,
-    images: TasksImages [],
+    images: Number,
     complete: number
 }
