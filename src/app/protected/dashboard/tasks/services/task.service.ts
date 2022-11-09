@@ -36,6 +36,9 @@ export class TaskService {
   }
 
   update(formData: FormData, id: number): Observable<Task>{
+    if(formData.get('link') == 'null'){
+      formData.delete('link');
+    }
     return this.http.post<Task>(`${this.baseUrl}/${id}`, formData);
   }
 

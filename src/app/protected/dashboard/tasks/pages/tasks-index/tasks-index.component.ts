@@ -120,6 +120,9 @@ export class TasksIndexComponent implements OnInit {
       if(data?.complete != undefined) {
         data.complete = res.complete;
       }
+      if(data?.link != undefined) {
+        data.link = res.link;
+      }
     });
   }
 

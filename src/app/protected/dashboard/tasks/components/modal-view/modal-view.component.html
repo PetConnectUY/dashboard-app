@@ -17,17 +17,21 @@
         <b>Descripción de la tarea:</b>
     </p>
     <div [innerHTML]="taskToHandle.description"></div>
-    <p *ngIf="taskToHandle.link ! ''">
-        <b>Enlace de la tarea:</b> {{taskToHandle.link}}
+    <p *ngIf="taskToHandle.link != ''">
+        <b>Enlace de la tarea:</b> <a [href]="taskToHandle.link">{{taskToHandle.link}}</a>
     </p>
-    <picture>
-        <img src="" alt="">
-    </picture>
+    <p *ngIf="noImages">
+        <fa-icon [icon]="faExclamationCircle" class="text-warning"></fa-icon> No contiene imágenes</p>
+    <div class="images">
+        <picture *ngFor="let item of items">
+            <img [src]="item.images" alt="task-image">
+        </picture>
+    </div> 
 </div>
 <div *ngIf="unknowError" class="modal-body text-center">
     <h3>
         <fa-icon [icon]="faExclamationCircle"></fa-icon>
-        Ocurrio un error al completar la tarea. Ponte en contacto con un administrador.
+        {{onChangeError}}
     </h3>
 </div>
 <div class="modal-footer">

@@ -65,7 +65,10 @@
                                     <fa-icon [icon]="faEllipsis"></fa-icon>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <a class="dropdown-item" (click)="updateItem(item)">
+                                    <button class="dropdown-item" *ngIf="userLoader" [disabled]="userLoader">
+                                        <fa-icon [icon]="faSpinner" [spin]="true"></fa-icon> Editar
+                                    </button>
+                                    <a class="dropdown-item" *ngIf="!userLoader" (click)="updateItem(item)">
                                         <fa-icon [icon]="faPencil" class="text-primary"></fa-icon> Editar
                                     </a>
                                     <a class="dropdown-item" (click)="deleteItem(item)">

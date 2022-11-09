@@ -67,7 +67,7 @@ export class TasksImagesIndexComponent implements OnInit {
         reader.onload = (__event) => {
           this.loader = false;
           this.unknowError = false;
-          this.images.push({image: reader.result, item: item});          
+          this.images.push({image: reader.result, item: item});
         }
       },
       error: (err: HttpErrorResponse) => {
