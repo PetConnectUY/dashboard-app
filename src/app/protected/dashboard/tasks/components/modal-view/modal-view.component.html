@@ -18,7 +18,7 @@
     </p>
     <div [innerHTML]="taskToHandle.description"></div>
     <p *ngIf="taskToHandle.link != ''">
-        <b>Enlace de la tarea:</b> <a [href]="taskToHandle.link">{{taskToHandle.link}}</a>
+        <b>Enlace de la tarea: </b> <a [href]="taskToHandle.link" target="_blank">{{taskToHandle.link}}</a>
     </p>
     <p *ngIf="noImages">
         <fa-icon [icon]="faExclamationCircle" class="text-warning"></fa-icon> No contiene imágenes</p>

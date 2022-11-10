@@ -18,11 +18,15 @@
     </p>
     <div [innerHTML]="taskToHandle.description"></div>
     <p *ngIf="taskToHandle.link ! ''">
-        <b>Enlace de la tarea:</b> {{taskToHandle.link}}
+        <b>Enlace de la tarea: </b> <a [href]="taskToHandle.link" target="_blank">{{taskToHandle.link}}</a>
     </p>
-    <picture>
-        <img src="" alt="">
-    </picture>
+    <p *ngIf="noImages">
+        <fa-icon [icon]="faExclamationCircle" class="text-warning"></fa-icon> No contiene imágenes</p>
+    <div class="images">
+        <picture *ngFor="let item of items">
+            <img (click)="openImage(item.images)" [src]="item.images" alt="task-image">
+        </picture>
+    </div> 
 </div>
 <div *ngIf="unknowError" class="modal-body text-center">
     <h3>

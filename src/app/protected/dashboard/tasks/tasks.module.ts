@@ -10,6 +10,7 @@ import { PaginationModule } from '../../shared/modules/pagination/pagination.mod
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalViewComponent } from './components/modal-view/modal-view.component';
+import { StatsModule } from '../stats/stats.module';
 
 
 
@@ -28,7 +29,8 @@ import { ModalViewComponent } from './components/modal-view/modal-view.component
     FormsModule,
     PaginationModule,
     RouterModule,
-    NgbModule
+    NgbModule,
+    StatsModule
   ]
 })
 export class TasksModule { }

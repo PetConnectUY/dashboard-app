@@ -45,7 +45,7 @@ const routes: Routes = [
       {
         path: 'tasks-images',
         loadChildren: () => import('./dashboard/tasks/images/images.module').then(m => m.ImagesModule)
-      }
+      },
     ]
   }
 ];

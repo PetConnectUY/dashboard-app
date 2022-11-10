@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { faUsers, faNewspaper, faStar, faRectangleList } from '@fortawesome/free-solid-svg-icons';
-import { IndexService } from '../../services/index.service';
-import { Stats } from '../../interfaces/stats';
+import { faUsers, faNewspaper, faLaptopCode, faCode } from '@fortawesome/free-solid-svg-icons';
+import { IndexService } from '../../../services/index.service';
+import { Stats } from '../../../interfaces/stats';
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
@@ -10,8 +10,8 @@ import { Stats } from '../../interfaces/stats';
 export class StatsComponent implements OnInit {
   faUsers = faUsers;
   faNewspaper = faNewspaper;
-  faStar = faStar;
-  faRectangleList = faRectangleList;
+  faLaptopCode = faLaptopCode;
+  faCode = faCode;
 
   stats!: Stats;
   loading: boolean = true;

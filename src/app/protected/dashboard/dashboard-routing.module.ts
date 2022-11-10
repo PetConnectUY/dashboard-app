@@ -45,7 +45,7 @@ const routes: Routes = [
   {
     path: 'tasks/images/:id',
     component: TasksImagesIndexComponent
-  }
+  },
 ];
 
 @NgModule({

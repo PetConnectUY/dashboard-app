@@ -10,6 +10,7 @@ import { ModalFormComponent } from './components/modal-form/modal-form.component
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { SearchComponent } from './components/search/search.component';
+import { StatsModule } from '../stats/stats.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { SearchComponent } from './components/search/search.component';
     ReactiveFormsModule,
     EditorModule,
     NgxSkeletonLoaderModule,
+    StatsModule
   ],
 })
 export class NewsModule { }

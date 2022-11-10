@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { PaginationModule } from '../../shared/modules/pagination/pagination.module';
+import { StatsModule } from '../stats/stats.module';
 
 
 
@@ -22,7 +23,8 @@ import { PaginationModule } from '../../shared/modules/pagination/pagination.mod
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    PaginationModule
+    PaginationModule,
+    StatsModule
   ]
 })
 export class UsersModule { }

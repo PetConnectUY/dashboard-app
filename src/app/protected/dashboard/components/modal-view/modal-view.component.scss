@@ -6,3 +6,19 @@
 .btn-modal:hover{
     background-color: darken($color: $secondary-color, $amount: 10);
 }
+
+.images{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    picture{
+        margin: 5px;
+        min-width: 320px;
+        border-radius: 5px;
+        img{
+            max-width: 280px;
+        }
+    }
+}

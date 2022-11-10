@@ -26,11 +26,8 @@
                             <fa-icon [icon]="faEye"></fa-icon>
                         </a>
                     </td>
-                    <td *ngIf="item.images > 0">
-                        <fa-icon class="text-success" [icon]="faCheck"></fa-icon>
-                    </td>
-                    <td *ngIf="item.images <= 0">
-                        <fa-icon class="text-danger" [icon]="faXmark"></fa-icon>
+                    <td>
+                        <p>Imágenes ({{item.images}})</p>
                     </td>
                     <td>
                         <ng-container *ngIf="item.complete === 1; else pending">
@@ -47,6 +44,9 @@
                 </tr>
             </tbody>
         </table>
+        <div *ngIf="!loader">
+            <app-pagination [pagination]="this.tasks"></app-pagination>
+        </div>
         <div class="tasks__container--empty" *ngIf="!loader && tasks.data.length <= 0">
             <h3><fa-icon class="text-danger" [icon]="faCircleExclamation"></fa-icon> No tienes ninguna tarea asignada por el momento.</h3>
         </div>

@@ -7,6 +7,7 @@ import { Tasks } from '../interfaces/tasks';
 import { ParamMap } from '@angular/router';
 import { TasksPagination } from '../interfaces/tasks-pagination';
 import { HelperService } from '../../../shared/services/helper.service';
+import { TaskImages } from '../tasks/interfaces/task-images';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,17 @@ export class IndexService {
   }
 
   getTasks(paramMap: ParamMap):Observable<TasksPagination> {
-    return this.http.get<TasksPagination>(this.baseUrl+'tasks', {
+    return this.http.get<TasksPagination>(this.baseUrl+'tasks/user-tasks', {
       params: this.helperService.getHttpParams(paramMap, ['page'])
     });
+  }
+
+  listImages(id: number): Observable<TaskImages[]>{
+    return this.http.get<TaskImages[]>(`${this.baseUrl}tasks-images/${id}`);
+  }
+
+  getImages(id: number): Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}tasks-images/${id}/view-image`, {responseType:"blob" as "json"});
   }
 
   completeTask(task: Tasks):Observable<Tasks> {

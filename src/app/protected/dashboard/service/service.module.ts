@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { PaginationModule } from '../../shared/modules/pagination/pagination.module';
+import { StatsModule } from '../stats/stats.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PaginationModule } from '../../shared/modules/pagination/pagination.mod
     RouterModule,
     NgbModule,
     EditorModule,
-    PaginationModule
+    PaginationModule,
+    StatsModule
   ]
 })
 export class ServiceModule { }

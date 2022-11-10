@@ -35,10 +35,10 @@ export class TasksComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.updateTasks();
+    this.updateTable();
   }
 
-  updateTasks(){
+  updateTable(){
     this.route.queryParamMap.subscribe(paramMap => {
       this.loader = true;
       this.indexService.getTasks(paramMap).subscribe({

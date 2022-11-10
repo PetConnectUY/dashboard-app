@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faBars, faUser, faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faSignOut, faKey } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { AuthService } from '../../../../shared/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
   faBars = faBars;
-  faUser = faUser;
+  faKey = faKey;
   faSignOut = faSignOut;
   constructor(
     private authService: AuthService
