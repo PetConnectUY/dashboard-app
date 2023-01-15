@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { map, tap, catchError } from 'rxjs/operators';
-import { of, Observable } from 'rxjs';
-import { User } from '../interfaces/user';
 import { AuthResponse } from '../interfaces/auth-response';
+import { catchError, map, of, tap, Observable } from 'rxjs';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,8 @@ export class AuthService {
     private http: HttpClient,
   ) { }
 
-  login(username: string, password: string) {
+  login(username: string, password: string)
+  {
     const url = `${this.baseUrl}auth/login`;
     const body = { username, password };
     return this.http.post<AuthResponse>(url, body)
@@ -23,50 +23,59 @@ export class AuthService {
         tap(res => {
           this.setAuthData(res.access_token, res.user);
         }),
-        map( valid => valid),
+        map(valid => valid),
         catchError( err => {
           return of(err);
         })
       );
   }
 
-  setToken(token: string) {
-    sessionStorage.setItem('token', token);
+  setToken(token: string)
+  {
+    return sessionStorage.setItem('token', token);
   }
 
-  getToken() {
+  getToken()
+  {
     return sessionStorage.getItem('token');
   }
 
-  removeToken() {
+  removeToken()
+  {
     return sessionStorage.removeItem('token');
   }
 
-  setUser(user: User) {
+  setUser(user: User)
+  {
     localStorage.setItem('user', JSON.stringify(user));
-  }
+  } 
 
-  getUser(): User|null {
+  getUser(): User|null
+  {
     const jsonUser = localStorage.getItem('user');
-    if(jsonUser) {
+    if(jsonUser)
+    {
       return JSON.parse(jsonUser);
     }
     return null;
   }
 
-  isAuthenticated():boolean {
+  isAuthenticated():boolean
+  {
     return Boolean(this.getToken());
   }
 
-  tokenExpired() {
+  tokenExpired()
+  {
     const token = this.getToken();
-    const payload = atob(token!.split('.')[1]);
-    const parsedPayLoad = JSON.parse(payload);
+    const payLoad = atob(token!.split('.')[1]);
+    const parsedPayLoad = JSON.parse(payLoad);
 
     return parsedPayLoad.exp > Date.now() / 1000;
   }
 
-  refreshToken(): Observable<boolean> {
+  refreshToken(): Observable<boolean>
+  {
     const url = `${this.baseUrl}auth/refresh`;
     return this.http.post<AuthResponse>(url, {})
       .pipe(
@@ -80,7 +89,8 @@ export class AuthService {
       );
   }
 
-  private setAuthData(token: string, user: User) {
+  private setAuthData(token: string, user: User)
+  {
     this.setToken(token);
     this.setUser(user);
   }
